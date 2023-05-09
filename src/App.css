@@ -9,7 +9,8 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgb(47, 47, 47);
-  color: azure;
+  background-color:rgb(221, 226, 231);
+  color:black;
   font-family: sans-serif;
+  flex-direction: column;
 }

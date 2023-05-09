@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../post.css";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import Comment from "../comment";
 const BASE_URI = "http://localhost:3000";
 
 const NAME_OF_UPLOAD_PRESET = "pafh9buy";
@@ -75,7 +78,6 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
     axios
       .post(`${BASE_URI}/posts`, { userClass, userGroup })
       .then((res) => {
-        // console.log(res.data);
         setPosts(res.data.posts.reverse());
       })
       .catch((error) => {
@@ -124,6 +126,30 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
                 </div>
 
                 <div className="time">
+                  <Popup
+                    trigger={<p>Comments</p>}
+                    modal
+                    nested
+                    contentStyle={{
+                      borderRadius: "10px",
+                      backgroundColor: "azure",
+                      fontFamily: "sans-serif",
+                      padding: "10px",
+                      width: "90%",
+                    }}
+                    className="popup-content"
+                  >
+                    {(close) => (
+                      <Comment
+                        close={close}
+                        postId={post._id}
+                        userId={userId}
+                        userClass={userClass}
+                        userGroup={userGroup}
+                      />
+                    )}
+                  </Popup>
+
                   <p>
                     {new Date(post.createdAt).toLocaleString("default", {
                       day: "numeric",

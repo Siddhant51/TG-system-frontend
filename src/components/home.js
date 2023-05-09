@@ -8,6 +8,7 @@ import TeacherFeed from "./teacher/teacherFeed";
 import Classes from "./admin/classes";
 import Groups from "./admin/groups";
 import Users from "./admin/users";
+import Topbar from "./topbar";
 
 const Home = ({
   user,
@@ -23,66 +24,68 @@ const Home = ({
   const [groupName, setGroupName] = useState("");
 
   return userRole === "teacher" ? (
-    <div className="display">
-      <div className="side-div">
-        <Sidebar
-          user={user}
-          switcher={switcher}
-          setSwitcher={setSwitcher}
-          setLoginUser={setLoginUser}
-        />
-      </div>
+    <>
+      <Topbar />
 
-      <div className="main">
-        {switcher === "profile" ? (
-          <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
-        ) : (
-          <TeacherFeed
-            userId={userId}
-            userClass={userClass}
-            userGroup={userGroup}
-          />
-        )}
-      </div>
-    </div>
-  ) : userRole === "admin" ? (
-    <div className="display">
-      <div className="side-div">
-        <Sidebar
-          user={user}
-          switcher={switcher}
-          setSwitcher={setSwitcher}
-          setLoginUser={setLoginUser}
-        />
-      </div>
-
-      <div className="main">
-        {switcher === "profile" ? (
-          <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
-        ) : switcher === "groups" ? (
-          <Groups
-            classId={classId}
-            setClassName={setClassName}
-            setGroupName={setGroupName}
+      <div className="display">
+        <div className="side-div">
+          <Sidebar
+            user={user}
+            switcher={switcher}
             setSwitcher={setSwitcher}
+            setLoginUser={setLoginUser}
           />
-        ) : switcher === "users" ? (
-          <Users className={className} groupName={groupName} />
-        ) : (
-          <Classes setClassId={setClassId} setSwitcher={setSwitcher} />
-        )}
+        </div>
+
+        <div className="main">
+          {switcher === "profile" ? (
+            <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
+          ) : (
+            <TeacherFeed
+              userId={userId}
+              userClass={userClass}
+              userGroup={userGroup}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
+  ) : userRole === "admin" ? (
+    <>
+      <Topbar />
+
+      <div className="display">
+        <div className="side-div">
+          <Sidebar
+            user={user}
+            switcher={switcher}
+            setSwitcher={setSwitcher}
+            setLoginUser={setLoginUser}
+          />
+        </div>
+
+        <div className="main">
+          {switcher === "profile" ? (
+            <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
+          ) : switcher === "groups" ? (
+            <Groups
+              classId={classId}
+              setClassName={setClassName}
+              setGroupName={setGroupName}
+              setSwitcher={setSwitcher}
+            />
+          ) : switcher === "users" ? (
+            <Users className={className} groupName={groupName} />
+          ) : (
+            <Classes setClassId={setClassId} setSwitcher={setSwitcher} />
+          )}
+        </div>
+      </div>
+    </>
   ) : (
-    <div className="display">
-      <div className="side-div">
-        <Sidebar
-          user={user}
-          switcher={switcher}
-          setSwitcher={setSwitcher}
-          setLoginUser={setLoginUser}
-        />
-      </div>
+    <>
+      <Topbar />
+
 
       <div className="main">
         {switcher === "profile" ? (
@@ -92,10 +95,30 @@ const Home = ({
             userId={userId}
             userClass={userClass}
             userGroup={userGroup}
+
+      <div className="display">
+        <div className="side-div">
+          <Sidebar
+            user={user}
+            switcher={switcher}
+            setSwitcher={setSwitcher}
+            setLoginUser={setLoginUser}
           />
-        )}
+        </div>
+
+        <div className="main">
+          {switcher === "profile" ? (
+            <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
+          ) : (
+            <StudentFeed
+              userId={userId}
+              userClass={userClass}
+              userGroup={userGroup}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
