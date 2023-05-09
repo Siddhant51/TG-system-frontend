@@ -40,7 +40,7 @@ function App() {
             path="/admin"
             element={<AdminLogin setLoginUser={setLoginUser} />}
           />
-          {/* <Route path="/register" element={<Register />} /> */}
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>

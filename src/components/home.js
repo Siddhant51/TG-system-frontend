@@ -86,7 +86,7 @@ const Home = ({
 
       <div className="main">
         {switcher === "profile" ? (
-          <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
+          <Profile user={user} userId={userId} userClass={userClass} userGroup={userGroup} setLoginUser={setLoginUser} />
         ) : (
           <StudentFeed
             userId={userId}

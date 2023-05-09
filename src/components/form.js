@@ -1,24 +1,47 @@
 import { useState } from "react";
+import axios from "axios";
 import React from "react";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
 import RadioInput from "./RadioInput";
+const BASE_URI = "http://localhost:3000";
 
-function Form() {
+
+function Form({userId ,userGroup , userClass}) {
   const [formData, setFormData] = useState({
     name: "",
+    branch_name: "",
+    rollno: "",
+    seatno: "",
+    prnno: "",
+    blood_grp: "",
+    dob: "",
+    s_phone: "",
     email: "",
-    message: "",
+    s_address: "",
+    pincode: "",
+    hobbies: "",
+    f_name: "",
+    f_phone: "",
+    m_name: "",
+    m_phone: "",
+    parent_address: "",
+    hasInput: "",
+    company: "",
+    designation: "",
+    location: "",
+    class: userClass,
+    group : userGroup,
+    user : userId,
   });
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   console.log(formData);
-  //   await axios.post(`${BASE_URI}/picture`, {
-  //       userId,
-  //       profilePic,
-  //     });
-  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(formData);
+    await axios.post(`${BASE_URI}/personalinfo`, {
+        formData
+      });
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +49,7 @@ function Form() {
   };
 
   return (
-    <form>
+    <form className="Form">
       {/* Student Info */}
       <InputField
         label="Name"
@@ -169,7 +192,7 @@ function Form() {
         />
       )}
 
-      <button type="submit">Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </form>
   );
 }
