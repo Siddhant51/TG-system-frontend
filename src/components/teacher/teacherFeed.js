@@ -22,33 +22,46 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
   const Create = async (e) => {
     e.preventDefault();
     try {
-      if (userId && content && file) {
-        const data = new FormData();
-        data.append("content", content);
-        data.append("file", file);
-        data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
-        data.append("folder", "TGsystem");
-
-        const res = await axios.post(
-          `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
-          data,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-
-        const img = res.data;
-        const media = img.secure_url;
-
-        await axios.post(`${BASE_URI}/create`, {
-          userClass,
-          userGroup,
-          content,
-          media,
-          userId,
-        });
+      if (userId && (content || file)) {
+        if (file) {
+          // If a file is selected, upload it to Cloudinary
+          const data = new FormData();
+          data.append("content", content);
+          data.append("file", file);
+          data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
+          data.append("folder", "TGsystem");
+  
+          const res = await axios.post(
+            `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
+            data,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+  
+          const img = res.data;
+          const media = img.secure_url;
+  
+          // Send POST request to create endpoint with text and image
+          await axios.post(`${BASE_URI}/create`, {
+            userClass,
+            userGroup,
+            content,
+            media,
+            userId,
+          });
+        } else {
+          // Send POST request to create endpoint with only text
+          await axios.post(`${BASE_URI}/create`, {
+            userClass,
+            userGroup,
+            content,
+            userId,
+          });
+        }
+  
         console.log("Post successful");
         setContent("");
         setFile();
@@ -59,6 +72,7 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
     axios

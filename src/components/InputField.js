@@ -2,7 +2,7 @@ function InputField({ label, name, value, onChange, type = "text" }) {
   return (
     <label>
       {label}:
-      <input type={type} name={name} value={value} onChange={onChange} />
+      <input type={type} name={name} value={value} onChange={onChange} /><br></br>
     </label>
   );
 }

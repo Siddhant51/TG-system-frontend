@@ -14,6 +14,10 @@ const Sidebar = ({ user, switcher, setSwitcher, setLoginUser }) => {
         <p>Feed</p>
       </div>
 
+      <div className = "option">
+        <p>Attendance</p>
+      </div>
+
       <div
         className="option"
         onClick={() => {

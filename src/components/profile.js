@@ -7,7 +7,7 @@ const BASE_URI = "http://localhost:3000";
 const NAME_OF_UPLOAD_PRESET = "pafh9buy";
 const YOUR_CLOUDINARY_ID = "dsmdga8vs";
 
-const Profile = ({ userId }) => {
+const Profile = ({ userId ,userGroup , userClass}) => {
   const [file, setFile] = useState();
 
   const handelImage = (event) => {
@@ -66,7 +66,11 @@ const Profile = ({ userId }) => {
           </button>
         </div>
       </div>
-      {/* <Form /> */}
+      <Form 
+      userId={userId}
+      userClass={userClass}
+      userGroup={userGroup}
+      />
     </>
   );
 };
