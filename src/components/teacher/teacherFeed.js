@@ -30,7 +30,7 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
           data.append("file", file);
           data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
           data.append("folder", "TGsystem");
-  
+
           const res = await axios.post(
             `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
             data,
@@ -40,10 +40,10 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
               },
             }
           );
-  
+
           const img = res.data;
           const media = img.secure_url;
-  
+
           // Send POST request to create endpoint with text and image
           await axios.post(`${BASE_URI}/create`, {
             userClass,
@@ -61,7 +61,7 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
             userId,
           });
         }
-  
+
         console.log("Post successful");
         setContent("");
         setFile();
@@ -72,7 +72,6 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
       console.log(error);
     }
   };
-  
 
   useEffect(() => {
     axios

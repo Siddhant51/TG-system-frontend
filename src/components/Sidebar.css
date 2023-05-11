@@ -1,0 +1,88 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 300px;
+    background-color: #333;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+  }
+  
+  .profile:hover {
+    background-color: #444;
+  }
+  
+  .img-container {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .option {
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #555;
+  }
+  
+  .option:hover {
+    background-color: #444;
+  }
+  
+  .logout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #444;
+    cursor: pointer;
+    border-top: 1px solid #555;
+  }
+  
+  .logout:hover {
+    background-color: #333;
+  }
+  
+  .toggle-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(11, 11, 11);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .toggle-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  .toggle-button:focus {
+    outline: none;
+  }
+  
+  
