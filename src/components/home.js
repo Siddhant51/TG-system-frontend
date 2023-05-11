@@ -9,6 +9,7 @@ import Classes from "./admin/classes";
 import Groups from "./admin/groups";
 import Users from "./admin/users";
 import Topbar from "./topbar";
+import Attendance from "./attendance";
 
 const Home = ({
   user,
@@ -40,6 +41,12 @@ const Home = ({
         <div className="main">
           {switcher === "profile" ? (
             <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
+          ) : switcher === "attendance" ? (
+            <Attendance
+              userId={userId}
+              userClass={userClass}
+              userGroup={userGroup}
+            />
           ) : (
             <TeacherFeed
               userId={userId}
@@ -85,16 +92,6 @@ const Home = ({
   ) : (
     <>
       <Topbar />
-
-
-      <div className="main">
-        {switcher === "profile" ? (
-          <Profile user={user} userId={userId} userClass={userClass} userGroup={userGroup} setLoginUser={setLoginUser} />
-        ) : (
-          <StudentFeed
-            userId={userId}
-            userClass={userClass}
-            userGroup={userGroup}
 
       <div className="display">
         <div className="side-div">
