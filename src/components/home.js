@@ -86,16 +86,6 @@ const Home = ({
     <>
       <Topbar />
 
-
-      <div className="main">
-        {switcher === "profile" ? (
-          <Profile user={user} userId={userId} userClass={userClass} userGroup={userGroup} setLoginUser={setLoginUser} />
-        ) : (
-          <StudentFeed
-            userId={userId}
-            userClass={userClass}
-            userGroup={userGroup}
-
       <div className="display">
         <div className="side-div">
           <Sidebar

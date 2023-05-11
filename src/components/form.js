@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 import InputField from "./InputField";
@@ -6,8 +6,7 @@ import TextAreaField from "./TextAreaField";
 import RadioInput from "./RadioInput";
 const BASE_URI = "http://localhost:3000";
 
-
-function Form({userId ,userGroup , userClass}) {
+function Form({ userId, userGroup, userClass }) {
   const [formData, setFormData] = useState({
     name: "",
     branch_name: "",
@@ -26,21 +25,43 @@ function Form({userId ,userGroup , userClass}) {
     m_name: "",
     m_phone: "",
     parent_address: "",
-    hasInput: "",
-    company: "",
-    designation: "",
-    location: "",
     class: userClass,
-    group : userGroup,
-    user : userId,
+    group: userGroup,
+    user: userId,
   });
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPersonalInfo = async () => {
+      try {
+        const res = await axios.post(`${BASE_URI}/getpersonalinfo`, {
+          userId,
+        });
+        setFormData(res.data.formData);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+
+    fetchPersonalInfo();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!formData) {
+    return <p>No personal information available.</p>;
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     // console.log(formData);
-    await axios.post(`${BASE_URI}/personalinfo`, {
-        formData
-      });
+    await axios.post(`${BASE_URI}/setpersonalinfo`, {
+      formData,
+    });
   };
 
   const handleChange = (event) => {
@@ -161,36 +182,6 @@ function Form({userId ,userGroup , userClass}) {
         value={formData.parent_address}
         onChange={handleChange}
       />
-      <RadioInput
-        label="Service?"
-        name="hasInput"
-        value={formData.hasInput}
-        onChange={handleChange}
-      />
-      {formData.hasInput === "yes" && (
-        <InputField
-          label="Company Name"
-          name="company"
-          value={formData.company}
-          onChange={handleChange}
-        />
-      )}
-      {formData.hasInput === "yes" && (
-        <InputField
-          label="Designation"
-          name="designation"
-          value={formData.designation}
-          onChange={handleChange}
-        />
-      )}
-      {formData.hasInput === "yes" && (
-        <InputField
-          label="Location"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-        />
-      )}
 
       <button onClick={handleSubmit}>Submit</button>
     </form>
