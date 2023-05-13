@@ -6,9 +6,9 @@ const BASE_URI = "http://localhost:3000";
 const YOUR_CLOUDINARY_ID = "dsmdga8vs";
 const NAME_OF_UPLOAD_PRESET = "pafh9buy";
 
-const Attendance = ({ userId, userClass, userGroup }) => {
+const Achievement = ({ userId, userClass, userGroup }) => {
   const [pdfFile, setPdfFile] = useState();
-  const [attendanceList, setAttendanceList] = useState([]);
+  const [achievementList, setAchievementList] = useState([]);
 
   const handleFile = (event) => {
     setPdfFile(event.target.files[0]);
@@ -36,7 +36,7 @@ const Attendance = ({ userId, userClass, userGroup }) => {
         const pdfUrl = res.data.secure_url;
         console.log("1");
 
-        await axios.post(`${BASE_URI}/setattendance`, {
+        await axios.post(`${BASE_URI}/setachievement`, {
           userClass,
           userGroup,
           pdfUrl,
@@ -44,7 +44,7 @@ const Attendance = ({ userId, userClass, userGroup }) => {
         });
         console.log("3");
 
-        console.log("Attendance uploaded successfully");
+        console.log("Achievement uploaded successfully");
         setPdfFile();
       } else {
         alert("Please select a file to upload");
@@ -57,9 +57,9 @@ const Attendance = ({ userId, userClass, userGroup }) => {
   useEffect(() => {
     console.log("4");
     axios
-      .post(`${BASE_URI}/getattendance`, { userClass, userGroup })
+      .post(`${BASE_URI}/getachievement`, { userId })
       .then((res) => {
-        setAttendanceList(res.data.posts);
+        setAchievementList(res.data.posts);
       })
       .catch((error) => {
         console.log(error);
@@ -83,12 +83,12 @@ const Attendance = ({ userId, userClass, userGroup }) => {
       </div>
 
       <div className="body">
-        {attendanceList
-          ? attendanceList.map((attendance) => (
-              <div className="attendance" key={attendance._id}>
+        {achievementList
+          ? achievementList.map((achievement) => (
+              <div className="achievement" key={achievement._id}>
                 <iframe
-                  src={`https://view.officeapps.live.com/op/embed.aspx?src=${attendance.pdf}`}
-                  // src={attendance.pdf}
+                  // src={`https://view.officeapps.live.com/op/embed.aspx?src=${achievement.pdf}`}
+                  src={achievement.pdf}
                   width="100%"
                   height="500px"
                 ></iframe>
@@ -100,4 +100,4 @@ const Attendance = ({ userId, userClass, userGroup }) => {
   );
 };
 
-export default Attendance;
+export default Achievement;

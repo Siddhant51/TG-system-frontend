@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
-import Form from "./form";
 import { useState } from "react";
 const BASE_URI = "http://localhost:3000";
 
 const NAME_OF_UPLOAD_PRESET = "pafh9buy";
 const YOUR_CLOUDINARY_ID = "dsmdga8vs";
 
-const Profile = ({ userId ,userGroup , userClass}) => {
+const Profile = ({ userId, userGroup, userClass }) => {
   const [file, setFile] = useState();
 
   const handelImage = (event) => {
@@ -66,11 +65,6 @@ const Profile = ({ userId ,userGroup , userClass}) => {
           </button>
         </div>
       </div>
-      <Form 
-      userId={userId}
-      userClass={userClass}
-      userGroup={userGroup}
-      />
     </>
   );
 };

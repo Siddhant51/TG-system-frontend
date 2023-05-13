@@ -14,7 +14,7 @@ function Form({ userId, userGroup, userClass }) {
     seatno: "",
     prnno: "",
     blood_grp: "",
-    dob: "",
+    // dob: "",
     s_phone: "",
     email: "",
     s_address: "",
@@ -60,6 +60,7 @@ function Form({ userId, userGroup, userClass }) {
     event.preventDefault();
     // console.log(formData);
     await axios.post(`${BASE_URI}/setpersonalinfo`, {
+      userId,
       formData,
     });
   };
@@ -108,13 +109,13 @@ function Form({ userId, userGroup, userClass }) {
         value={formData.blood_grp}
         onChange={handleChange}
       />
-      <InputField
+      {/* <InputField
         type="date"
         label="Date of Birth"
         name="dob"
         value={formData.dob}
         onChange={handleChange}
-      />
+      /> */}
       <InputField
         type="tel"
         label="Contact No"

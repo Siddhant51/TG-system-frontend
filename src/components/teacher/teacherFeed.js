@@ -101,69 +101,68 @@ const TeacherFeed = ({ userId, userClass, userGroup }) => {
         </div>
       </div>
 
-      <div className="body">
-        {posts
-          ? posts.map((post) => (
-              <div className="post" key={post._id}>
-                <div className="user">
-                  <div className="icon">
-                    <img src={post.user.profilePic}></img>
-                  </div>
-                  <div className="username">{post.user.name}</div>
+      {posts
+        ? posts.map((post) => (
+            <div className="post" key={post._id}>
+              <div className="user">
+                <div className="icon">
+                  <img src={post.user.profilePic}></img>
                 </div>
-
-                {post.media ? (
-                  <div className="media">
-                    <div className="media-container">
-                      <img src={post.media}></img>
-                    </div>
-                  </div>
-                ) : null}
-
-                <div className="content">
-                  <p>{post.content}</p>
-                </div>
-
-                <div className="time">
-                  <Popup
-                    trigger={<p>Comments</p>}
-                    modal
-                    nested
-                    contentStyle={{
-                      borderRadius: "10px",
-                      backgroundColor: "azure",
-                      fontFamily: "sans-serif",
-                      padding: "10px",
-                      width: "90%",
-                    }}
-                    className="popup-content"
-                  >
-                    {(close) => (
-                      <Comment
-                        close={close}
-                        postId={post._id}
-                        userId={userId}
-                        userClass={userClass}
-                        userGroup={userGroup}
-                      />
-                    )}
-                  </Popup>
-
-                  <p>
-                    {new Date(post.createdAt).toLocaleString("default", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: true,
-                    })}
-                  </p>
-                </div>
+                <div className="username">{post.user.name}</div>
               </div>
-            ))
-          : null}
-      </div>
+
+              {post.media ? (
+                <div className="media">
+                  <div className="media-container">
+                    <img src={post.media}></img>
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="content">
+                <p>{post.content}</p>
+              </div>
+
+              <div className="time">
+                <Popup
+                  trigger={<p>Comments</p>}
+                  modal
+                  nested
+                  contentStyle={{
+                    borderRadius: "10px",
+                    backgroundColor: "azure",
+                    fontFamily: "sans-serif",
+                    paddingLeft: "10px",
+                    paddingRight: "10px",
+                    width: "90%",
+                  }}
+                  className="popup-content"
+                >
+                  {(close) => (
+                    <Comment
+                      close={close}
+                      postId={post._id}
+                      userId={userId}
+                      userClass={userClass}
+                      userGroup={userGroup}
+                    />
+                  )}
+                </Popup>
+
+                <p>
+                  {new Date(post.createdAt).toLocaleString("default", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
+                </p>
+              </div>
+            </div>
+          ))
+        : null}
     </>
   );
 };
