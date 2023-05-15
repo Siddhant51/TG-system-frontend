@@ -56,19 +56,17 @@ const Sidebar = ({
               <p>Achievement</p>
             </div>
           </>
-        ) : (
-          <>
-            <div
-              className="option"
-              onClick={() => {
-                setSwitcher("attendance");
-                setShowSidebar(!showSidebar);
-              }}
-            >
-              <p>Attendance</p>
-            </div>
-          </>
-        )}
+        ) : userRole === "teacher" ? (
+          <div
+            className="option"
+            onClick={() => {
+              setSwitcher("attendance");
+              setShowSidebar(!showSidebar);
+            }}
+          >
+            <p>Attendance</p>
+          </div>
+        ) : null}
 
         <div
           className="option"

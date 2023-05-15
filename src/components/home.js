@@ -27,26 +27,25 @@ const Home = ({
   const [groupName, setGroupName] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
 
-  return (
+  return userRole === "teacher" ? (
     <>
       <Topbar />
 
-      <div className="display">
-        <div
-          className="toggle-button"
-          onClick={() => setShowSidebar(!showSidebar)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-          <h1>=</h1>
-        </div>
+      <div
+        className="toggle-button"
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>=</h1>
+      </div>
 
+      <div className="display">
         <Sidebar
           user={user}
           switcher={switcher}
           setSwitcher={setSwitcher}
-          userRole={userRole}
           setLoginUser={setLoginUser}
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
@@ -61,14 +60,43 @@ const Home = ({
               userClass={userClass}
               userGroup={userGroup}
             />
-          ) : userRole === "teacher" ? (
+          ) : (
             <TeacherFeed
               userId={userId}
               userClass={userClass}
               userGroup={userGroup}
             />
-          ) : userRole === "admin" ? (
-            <Classes setClassId={setClassId} setSwitcher={setSwitcher} />
+          )}
+        </div>
+      </div>
+    </>
+  ) : userRole === "admin" ? (
+    <>
+      <Topbar />
+
+      <div
+        className="toggle-button"
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>=</h1>
+      </div>
+
+      <div className="display">
+        <Sidebar
+          user={user}
+          switcher={switcher}
+          setSwitcher={setSwitcher}
+          setLoginUser={setLoginUser}
+          showSidebar={showSidebar}
+          setShowSidebar={setShowSidebar}
+        />
+
+        <div className="main">
+          {switcher === "profile" ? (
+            <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
           ) : switcher === "groups" ? (
             <Groups
               classId={classId}
@@ -78,14 +106,48 @@ const Home = ({
             />
           ) : switcher === "users" ? (
             <Users className={className} groupName={groupName} />
-          ) : switcher === "personalinfo" ? (
-            <Form userId={userId} userClass={userClass} userGroup={userGroup} />
+          ) : (
+            <Classes setClassId={setClassId} setSwitcher={setSwitcher} />
+          )}
+        </div>
+      </div>
+    </>
+  ) : (
+    <>
+      <Topbar />
+
+      <div
+        className="toggle-button"
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <h1>=</h1>
+      </div>
+
+      <div className="display">
+        <Sidebar
+          user={user}
+          switcher={switcher}
+          setSwitcher={setSwitcher}
+          userRole={userRole}
+          setLoginUser={setLoginUser}
+          showSidebar={showSidebar}
+          setShowSidebar={setShowSidebar}
+        />
+
+        <div className="main">
+          {switcher === "profile" ? (
+            <Profile user={user} userId={userId} setLoginUser={setLoginUser} />
           ) : switcher === "achievement" ? (
             <Achievement
               userId={userId}
               userClass={userClass}
               userGroup={userGroup}
             />
+          ) : switcher === "personalinfo" ? (
+            <Form userId={userId} userClass={userClass} userGroup={userGroup} />
           ) : (
             <StudentFeed
               userId={userId}
