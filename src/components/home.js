@@ -44,6 +44,7 @@ const Home = ({
       <div className="display">
         <Sidebar
           user={user}
+          userRole={userRole}
           switcher={switcher}
           setSwitcher={setSwitcher}
           setLoginUser={setLoginUser}
@@ -87,6 +88,7 @@ const Home = ({
       <div className="display">
         <Sidebar
           user={user}
+          userRole={userRole}
           switcher={switcher}
           setSwitcher={setSwitcher}
           setLoginUser={setLoginUser}

@@ -9,6 +9,7 @@ const Sidebar = ({
   showSidebar,
   setShowSidebar,
 }) => {
+  console.log(userRole);
   return (
     <>
       <div className={`sidebar ${showSidebar ? "show-sidebar" : ""}`}>
