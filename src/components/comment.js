@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./comment.css";
 const BASE_URI = "http://localhost:3000";
 
-const Comment = ({ close, postId, userId, userClass, userGroup }) => {
+const Comment = ({ postId, userId, userClass, userGroup }) => {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
 

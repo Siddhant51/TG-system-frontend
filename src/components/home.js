@@ -12,6 +12,7 @@ import Topbar from "./topbar";
 import Attendance from "./attendance";
 import Form from "./form";
 import Achievement from "./achievement";
+import Students from "./students";
 
 const Home = ({
   user,
@@ -61,6 +62,8 @@ const Home = ({
               userClass={userClass}
               userGroup={userGroup}
             />
+          ) : switcher === "students" ? (
+            <Students userClass={userClass} userGroup={userGroup} />
           ) : (
             <TeacherFeed
               userId={userId}
